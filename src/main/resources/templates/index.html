@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Armario Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header con Navbar -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">👔 Mi Armario</h1>
+                <div class="flex gap-4">
+                    <button onclick="mostrarVista('todas')" id="btn-todas" class="px-6 py-2 rounded-lg font-semibold transition bg-indigo-600 text-white hover:bg-indigo-700">
+                        Todas las Prendas
+                    </button>
+                    <button onclick="mostrarVista('outfit')" id="btn-outfit" class="px-6 py-2 rounded-lg font-semibold transition bg-gray-200 text-gray-700 hover:bg-gray-300">
+                        Crear Outfit
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Vista: Todas las Prendas -->
+    <div id="vista-todas" class="max-w-7xl mx-auto px-4 py-8">
+        <div class="mb-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Todas mis Prendas</h2>
+            <p class="text-gray-600">Gestiona tu colección completa</p>
+        </div>
+        
+        <div id="grid-prendas" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Las prendas se cargarán aquí -->
+        </div>
+    </div>
+
+    <!-- Vista: Crear Outfit -->
+    <div id="vista-outfit" class="hidden max-w-7xl mx-auto px-4 py-8">
+        <div class="mb-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Crear Outfit</h2>
+            <p class="text-gray-600">Combina tus prendas para crear el look perfecto</p>
+        </div>
+
+        <div class="space-y-6">
+            <!-- Parte Superior -->
+            <div class="bg-white rounded-xl shadow-lg p-6 min-h-[300px]">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">👕 Parte Superior</h3>
+                <div class="flex items-center justify-between gap-4">
+                    <button onclick="cambiarPrenda('superior', -1)" class="bg-indigo-600 text-white p-3 rounded-full hover:bg-indigo-700 transition shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <div id="prenda-superior" class="flex-1">
+                        <!-- Prenda superior actual -->
+                    </div>
+                    
+                    <button onclick="cambiarPrenda('superior', 1)" class="bg-indigo-600 text-white p-3 rounded-full hover:bg-indigo-700 transition shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pantalones -->
+            <div class="bg-white rounded-xl shadow-lg p-6 min-h-[300px]">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">👖 Pantalones</h3>
+                <div class="flex items-center justify-between gap-4">
+                    <button onclick="cambiarPrenda('pantalones', -1)" class="bg-indigo-600 text-white p-3 rounded-full hover:bg-indigo-700 transition shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <div id="prenda-pantalones" class="flex-1">
+                        <!-- Prenda pantalones actual -->
+                    </div>
+                    
+                    <button onclick="cambiarPrenda('pantalones', 1)" class="bg-indigo-600 text-white p-3 rounded-full hover:bg-indigo-700 transition shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Zapatos -->
+            <div class="bg-white rounded-xl shadow-lg p-6 min-h-[300px]">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">👟 Calzado</h3>
+                <div class="flex items-center justify-between gap-4">
+                    <button onclick="cambiarPrenda('zapatos', -1)" class="bg-indigo-600 text-white p-3 rounded-full hover:bg-indigo-700 transition shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <div id="prenda-zapatos" class="flex-1">
+                        <!-- Prenda zapatos actual -->
+                    </div>
+                    
+                    <button onclick="cambiarPrenda('zapatos', 1)" class="bg-indigo-600 text-white p-3 rounded-full hover:bg-indigo-700 transition shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Estado de la aplicación
+        let prendas = [];
+        let indicesSuperior = 0;
+        let indicesPantalones = 0;
+        let indicesZapatos = 0;
+        let prendasSuperior = [];
+        let prendasPantalones = [];
+        let prendasZapatos = [];
+
+        // Inicializar la aplicación
+        function inicializar() {
+            prendas = prendasEjemplo;
+            
+            cargarTodasLasPrendas();
+            clasificarPrendas();
+            actualizarOutfit();
+        }
+
+        // Mostrar vista
+        function mostrarVista(vista) {
+            const vistaTodas = document.getElementById('vista-todas');
+            const vistaOutfit = document.getElementById('vista-outfit');
+            const btnTodas = document.getElementById('btn-todas');
+            const btnOutfit = document.getElementById('btn-outfit');
+
+            if (vista === 'todas') {
+                vistaTodas.classList.remove('hidden');
+                vistaOutfit.classList.add('hidden');
+                btnTodas.className = 'px-6 py-2 rounded-lg font-semibold transition bg-indigo-600 text-white hover:bg-indigo-700';
+                btnOutfit.className = 'px-6 py-2 rounded-lg font-semibold transition bg-gray-200 text-gray-700 hover:bg-gray-300';
+            } else {
+                vistaTodas.classList.add('hidden');
+                vistaOutfit.classList.remove('hidden');
+                btnOutfit.className = 'px-6 py-2 rounded-lg font-semibold transition bg-indigo-600 text-white hover:bg-indigo-700';
+                btnTodas.className = 'px-6 py-2 rounded-lg font-semibold transition bg-gray-200 text-gray-700 hover:bg-gray-300';
+            }
+        }
+
+        // Cargar todas las prendas en el grid
+        function cargarTodasLasPrendas() {
+            const grid = document.getElementById('grid-prendas');
+            grid.innerHTML = '';
+
+            prendas.forEach(prenda => {
+                const card = crearTarjetaPrenda(prenda);
+                grid.innerHTML += card;
+            });
+        }
+
+        // Crear HTML de tarjeta de prenda
+        function crearTarjetaPrenda(prenda) {
+            const coloresHTML = prenda.colores.map(color => 
+                `<span class="inline-block w-5 h-5 rounded-full border-2 border-gray-200 mr-1" style="background-color: #${color}"></span>`
+            ).join('');
+
+            return `
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all duration-200">
+                    <div class="aspect-[3/4] bg-gray-100">
+                        <img src="${prenda.imagen}" alt="${prenda.nombre}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">${prenda.nombre}</h3>
+                        <div class="space-y-1 text-sm text-gray-600">
+                            <p><span class="font-semibold text-gray-800">Tipo:</span> ${prenda.tipo}</p>
+                            <p><span class="font-semibold text-gray-800">Marca:</span> ${prenda.marca}</p>
+                            <p><span class="font-semibold text-gray-800">Temporada:</span> ${prenda.temporada}</p>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="font-semibold text-gray-800">Colores:</span>
+                                <div class="flex">${coloresHTML}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Clasificar prendas por categoría
+        function clasificarPrendas() {
+            prendasSuperior = prendas.filter(p => 
+                ['camiseta', 'sudadera', 'chaqueta', 'jersey'].includes(p.tipo.toLowerCase())
+            );
+            prendasPantalones = prendas.filter(p => 
+                p.tipo.toLowerCase().includes('pantalon') || p.tipo.toLowerCase().includes('short')
+            );
+            prendasZapatos = prendas.filter(p => 
+                p.tipo.toLowerCase().includes('zapato') || p.tipo.toLowerCase().includes('zapatilla') || 
+                p.tipo.toLowerCase().includes('bamba') || p.tipo.toLowerCase().includes('bota')
+            );
+        }
+
+        // Cambiar prenda en el outfit
+        function cambiarPrenda(categoria, direccion) {
+            if (categoria === 'superior' && prendasSuperior.length > 0) {
+                indicesSuperior = (indicesSuperior + direccion + prendasSuperior.length) % prendasSuperior.length;
+            } else if (categoria === 'pantalones' && prendasPantalones.length > 0) {
+                indicesPantalones = (indicesPantalones + direccion + prendasPantalones.length) % prendasPantalones.length;
+            } else if (categoria === 'zapatos' && prendasZapatos.length > 0) {
+                indicesZapatos = (indicesZapatos + direccion + prendasZapatos.length) % prendasZapatos.length;
+            }
+            actualizarOutfit();
+        }
+
+        // Actualizar visualización del outfit
+        function actualizarOutfit() {
+            if (prendasSuperior.length > 0) {
+                document.getElementById('prenda-superior').innerHTML = 
+                    crearTarjetaOutfit(prendasSuperior[indicesSuperior]);
+            } else {
+                document.getElementById('prenda-superior').innerHTML = 
+                    '<p class="text-gray-500 text-center">No hay prendas superiores</p>';
+            }
+            
+            if (prendasPantalones.length > 0) {
+                document.getElementById('prenda-pantalones').innerHTML = 
+                    crearTarjetaOutfit(prendasPantalones[indicesPantalones]);
+            } else {
+                document.getElementById('prenda-pantalones').innerHTML = 
+                    '<p class="text-gray-500 text-center">No hay pantalones</p>';
+            }
+            
+            if (prendasZapatos.length > 0) {
+                document.getElementById('prenda-zapatos').innerHTML = 
+                    crearTarjetaOutfit(prendasZapatos[indicesZapatos]);
+            } else {
+                document.getElementById('prenda-zapatos').innerHTML = 
+                    '<p class="text-gray-500 text-center">No hay calzado</p>';
+            }
+        }
+
+        // Crear HTML de tarjeta para outfit
+        function crearTarjetaOutfit(prenda) {
+            const coloresHTML = prenda.colores.map(color => 
+                `<span class="inline-block w-5 h-5 rounded-full border-2 border-gray-200 mr-1" style="background-color: #${color}"></span>`
+            ).join('');
+
+            return `
+                <div class="flex gap-4 items-center">
+                    <div class="w-48 h-64 bg-gray-100 rounded-lg overflow-hidden shrink-0">
+                        <img src="${prenda.imagen}" alt="${prenda.nombre}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-xl text-gray-800 mb-3">${prenda.nombre}</h4>
+                        <div class="space-y-2 text-gray-600">
+                            <p><span class="font-semibold text-gray-800">Tipo:</span> ${prenda.tipo}</p>
+                            <p><span class="font-semibold text-gray-800">Marca:</span> ${prenda.marca}</p>
+                            <p><span class="font-semibold text-gray-800">Temporada:</span> ${prenda.temporada}</p>
+                            <div class="flex items-center gap-2 mt-3">
+                                <span class="font-semibold text-gray-800">Colores:</span>
+                                <div class="flex">${coloresHTML}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Inicializar cuando cargue la página
+        window.addEventListener('DOMContentLoaded', inicializar);
+    </script>
+</body>
+</html>
